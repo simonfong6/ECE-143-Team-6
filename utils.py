@@ -78,13 +78,6 @@ def filter(data):
         filtered.append(qr)
     return filtered
 
-def is_numeric(value):
-    """
-    Checks if a given value is numeric. Usefull for diffrentiating true or
-    false questions vs ones that require a free response number.
-    """
-    return not isinstance(value, bool)
-
 def create_dataframe(data):
     df = pd.DataFrame(data)
     return df
