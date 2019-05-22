@@ -147,13 +147,14 @@ def drop_all_outliers(df):
     # Drop IQ Score outliers.
     df, outliers_iq_score = drop_outliers(df, 'iq_score', 0, 200)
 
-
+    # Drop fluent languages outliers.
     df, outliers_foreign_langauges_fluent = drop_outliers(
                                             df, 
                                             'foreign_langauges_fluent',
                                             0,
                                             20)
-
+    
+    # Drop non-fluent languages outliers.
     df, outliers_foreign_langauges_nonfluent = drop_outliers(
                                                 df,
                                                 'foreign_langauges_nonfluent',
