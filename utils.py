@@ -124,25 +124,53 @@ def turn_off_scientific_notation():
     """
     pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
-def drop_height_outliers(df):
+def drop_outliers(df, column_name, min_val, max_val):
     """
-    Attempts to remove very large height outliers from data.
+    Drops outliers based on range, inclusive.
     """
-    max_height = 250    # 8 ft
-    min_height = 121    # 4 ft
-    df = df[df['height_cm'] <= max_height]
-    df = df[df['height_cm'] >= min_height]
-    return df
+
+    # Find the outliers.
+    max_outliers = df[df[column_name] > max_val]
+    min_outliers = df[df[column_name] < min_val]
+    outliers = pd.concat([max_outliers,min_outliers])
+    
+    # Drop the outliers.
+    df = df[df[column_name] <= max_val]
+    df = df[df[column_name] >= min_val]
+
+    return df, outliers
+
+def drop_all_outliers(df):
+    """
+    Drops all outliers.
+    """
+
+    # Keep heights between 4ft and 8ft.
+    df, outliers_height = drop_outliers(df, 'height_cm', 121, 250)
+
+    # Drop Instruments outliers.
+    df, outliers_instruments = drop_outliers(df, 'instruments', 0, 20)
+    
+    # Drop IQ Score outliers.
+    df, outliers_iq_score = drop_outliers(df, 'iq_score', 0, 200)
+
+    # Combine outliers
+    outliers = pd.concat(
+                [
+                    outliers_height,
+                    outliers_instruments,
+                    outliers_iq_score
+                ])
+
+    return df, outliers
 
 def main():
     df = load_data_dataframe()
     turn_off_scientific_notation()
-    df = drop_height_outliers(df)
-    print(df)
+    df, outliers = drop_all_outliers(df)
     sums = df.sum()
     count = df.shape[0]
     averages = sums / count
-    print(averages)
 
 if __name__ == '__main__':
     main()
