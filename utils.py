@@ -116,17 +116,59 @@ def create_dataframe(data):
     df = pd.DataFrame(data)
     return df
 
-def main():
+def load_data_dataframe():
+    """
+    Loads data as dataframe.
+    """
     data = load_data()
-    
     data = filter(data)
-
-    run_statistics(data)
-
     just_list = [ r.responses for r in data]
-
     df = create_dataframe(just_list)
-    print(df)
+
+    numeric_columns = [
+        'foreign_langauges_fluent',
+        'foreign_langauges_nonfluent',
+        'height_cm',
+        'instruments',
+        'iq_score'
+    ]
+
+    # Fix strings to numeric values.
+    for column in numeric_columns:
+        df[column] = pd.to_numeric(df[column])
+
+            
+    column = 'tattoos'
+    df[column] = pd.to_numeric(df[column])
+    df[column].fillna(0)
+
+
+    return df
+
+def turn_off_scientific_notation():
+    """
+    Turns off scienctific notation in Pandas when displaying dataframes.
+    """
+    pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+def drop_height_outliers(df):
+    """
+    Attempts to remove very large height outliers from data.
+    """
+    max_height = 250    # 8 ft
+    min_height = 121    # 4 ft
+    df = df[df['height_cm'] <= max_height]
+    df = df[df['height_cm'] >= min_height]
+    return df
+
+def main():
+    df = load_data_dataframe()
+    turn_off_scientific_notation()
+    df = drop_height_outliers(df)
+    sums = df.sum()
+    count = df.shape[0]
+    averages = sums / count
+    print(averages)
 
 if __name__ == '__main__':
     main()
