@@ -85,33 +85,6 @@ def is_numeric(value):
     """
     return not isinstance(value, bool)
 
-def run_statistics(data):
-    count = len(data)
-    accumulated = {}
-    for point in data:
-        resp = point.responses
-        for question, value in resp.items():
-            # Add the question if not already in.
-            if question not in accumulated:
-                accumulated[question] = 0
-            
-            # For numeric types, sum the values.
-            if is_numeric(value):
-                try:
-                    accumulated[question] += float(value)
-                except ValueError:
-                    msg = f"Converting '{value}' to 0.'"
-                    # print(msg)
-                    accumulated[question] += 0
-            # For true/false, just count the number of true.
-            else:
-                if value is True:
-                    accumulated[question] += 1
-    print_dict(accumulated)
-    print(f"Count: {count}")
-
-    return accumulated, count
-
 def create_dataframe(data):
     df = pd.DataFrame(data)
     return df
