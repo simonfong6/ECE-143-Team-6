@@ -147,16 +147,27 @@ def drop_all_outliers(df):
     # Drop IQ Score outliers.
     df, outliers_iq_score = drop_outliers(df, 'iq_score', 0, 200)
 
-    df, outliers_iq_score = drop_outliers(df, 'foreign_langauges_fluent', 0, 20)
 
-    df, outliers_iq_score = drop_outliers(df, 'foreign_langauges_nonfluent', 0, 20)
+    df, outliers_foreign_langauges_fluent = drop_outliers(
+                                            df, 
+                                            'foreign_langauges_fluent',
+                                            0,
+                                            20)
+
+    df, outliers_foreign_langauges_nonfluent = drop_outliers(
+                                                df,
+                                                'foreign_langauges_nonfluent',
+                                                0,
+                                                20)
 
     # Combine outliers
     outliers = pd.concat(
                 [
                     outliers_height,
                     outliers_instruments,
-                    outliers_iq_score
+                    outliers_iq_score,
+                    outliers_foreign_langauges_fluent,
+                    outliers_foreign_langauges_nonfluent
                 ])
 
     return df, outliers
