@@ -138,6 +138,7 @@ def main():
     df = load_data_dataframe()
     turn_off_scientific_notation()
     df = drop_height_outliers(df)
+    print(df)
     sums = df.sum()
     count = df.shape[0]
     averages = sums / count
