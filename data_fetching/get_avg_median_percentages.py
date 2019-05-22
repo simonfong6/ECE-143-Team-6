@@ -3,7 +3,6 @@ from pandas.io.json import json_normalize
 import pandas as pd
 from pandas import ExcelWriter
 import xlsxwriter
-import collections
 import numpy as np
 import copy
 def main():
@@ -46,7 +45,7 @@ def main():
 
     # Collect data from first response
     for key, val in first_response.items():
-        response_score.loc[id_numbers[0],key] = val['score']
+        response_score.loc[id_numbers[0],key] = val['value']
     
     # Erase first response since already recorded
     id_numbers.pop(0)
@@ -63,20 +62,34 @@ def main():
         for category, val in _dict.items():
             
             # Store score in data frame
-            response_score.loc[id_, category] = val['score']
+            response_score.loc[id_, category] = val['value']
+    
+    mean = response_score.mean()
+    median = response_score.median()
+    var = response_score.var()
+
+    mean = pd.DataFrame({'mean':mean.values}, index = mean.index)
+    mean.index.name = 'Categories'
+    
+    median = pd.DataFrame({'median':median.values}, index = median.index)
+    median.index.name = 'Categories'
+    
+    var = pd.DataFrame({'var': var.values}, index = var.index)
+    var.index.name = 'Categories'
+
+    write_excel_sheet(response_score,"response_score")
+    write_excel_sheet(mean,"mean")
+    write_excel_sheet(median,"median")
+    write_excel_sheet(var,"var")
+    
 
     
-    # Write an excel sheet of Data Frame
-    if write_to_excel == True: 
-        write_excel_sheet(df)
 
     
-
-    
-def write_excel_sheet(df):
+def write_excel_sheet(df,file_name):
 
     # Write an excel file to see data
-    writer = ExcelWriter('PythonExport.xlsx',engine='xlsxwriter')
+    writer = ExcelWriter(f"{file_name}.xlsx",engine='xlsxwriter')
     
     # Create sheet for data frame
     df.to_excel(writer,sheet_name='Sheet1')
