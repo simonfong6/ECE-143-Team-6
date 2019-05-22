@@ -2,14 +2,21 @@
 """
 """
 import json
+import pandas as pd
 
 DATA_FILE_NAME = 'data_fetching/sadscore_data.json'
 
 def dumps(dict_):
+    """
+    Helps print dictionaries as indented JSON for readability.
+    """
     string = json.dumps(dict_, indent=4, sort_keys=True)
     return string
 
 def print_dict(dict_):
+    """
+    Prints a dictionary in readable format.
+    """
     print(dumps(dict_))
 
 class QuizResponse:
@@ -28,6 +35,21 @@ class QuizResponse:
 
     @staticmethod
     def filter_questions(responses):
+        """
+        Extract only the value of each response disregarding other details.
+
+        Example:
+        data = {
+                "above_platinum": {
+                    "name": "above_platinum",
+                    "score": 0,
+                    "value": false
+                }
+        }
+        -> {
+            "above_platinum": false
+        }
+        """
         new_questions = {}
         for key, question in responses.items():
             new_questions[key] = question['value']
@@ -35,12 +57,19 @@ class QuizResponse:
 
 
 def load_data():
+    """
+    Loads the JSON data as a dictionary.
+    """
     with open(DATA_FILE_NAME) as input_file:
         data = json.load(input_file)
     
     return data
 
 def filter(data):
+    """
+    Runs through all the data, creates QuizResponse objects, and puts them in a
+    list.
+    """
     filtered = []
     for response in data:
         if 'responses' not in response:
@@ -50,6 +79,10 @@ def filter(data):
     return filtered
 
 def is_numeric(value):
+    """
+    Checks if a given value is numeric. Usefull for diffrentiating true or
+    false questions vs ones that require a free response number.
+    """
     return not isinstance(value, bool)
 
 def run_statistics(data):
@@ -66,7 +99,7 @@ def run_statistics(data):
             if is_numeric(value):
                 try:
                     accumulated[question] += float(value)
-                except ValueError as e:
+                except ValueError:
                     msg = f"Converting '{value}' to 0.'"
                     # print(msg)
                     accumulated[question] += 0
@@ -79,6 +112,9 @@ def run_statistics(data):
 
     return accumulated, count
 
+def create_dataframe(data):
+    df = pd.DataFrame(data)
+    return df
 
 def main():
     data = load_data()
@@ -86,6 +122,11 @@ def main():
     data = filter(data)
 
     run_statistics(data)
+
+    just_list = [ r.responses for r in data]
+
+    df = create_dataframe(just_list)
+    print(df)
 
 if __name__ == '__main__':
     main()
