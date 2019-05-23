@@ -32,3 +32,31 @@ def graph_labels(title, xlabel=None, ylabel=None):
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+
+def pie_chart(percentages, column_name, yes_label, no_label, title):
+    """
+    Helps plot a pie chart for yes or no data.
+    """
+    yes_percentage = percentages[column_name]
+    no_percentage = 1 - yes_percentage
+
+    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+    labels = yes_label, no_label
+    sizes = [yes_percentage, no_percentage]
+
+    # Explode the Yes.
+    explode = (0.1, 0)
+
+    ax = plt.gca()
+    ax.pie(
+        sizes,
+        explode=explode,
+        labels=labels,
+        autopct='%1.1f%%',
+        shadow=True,
+        startangle=90)
+
+    # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax.axis('equal')
+
+    plt.title(title)
