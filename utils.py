@@ -96,7 +96,8 @@ def load_data_dataframe():
         'foreign_langauges_nonfluent',
         'height_cm',
         'instruments',
-        'iq_score'
+        'iq_score',
+        'attractiveness'
     ]
 
     # Fix strings to numeric values.
