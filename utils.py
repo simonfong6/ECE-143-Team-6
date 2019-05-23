@@ -162,6 +162,13 @@ def drop_all_outliers(df):
                                                 0,
                                                 20)
 
+    # Drop non-fluent languages outliers.
+    df, outliers_tattoos = drop_outliers(
+                                                df,
+                                                'tattoos',
+                                                0,
+                                                20)
+
     # Combine outliers
     outliers = pd.concat(
                 [
@@ -169,7 +176,8 @@ def drop_all_outliers(df):
                     outliers_instruments,
                     outliers_iq_score,
                     outliers_foreign_langauges_fluent,
-                    outliers_foreign_langauges_nonfluent
+                    outliers_foreign_langauges_nonfluent,
+                    outliers_tattoos
                 ])
 
     return df, outliers
