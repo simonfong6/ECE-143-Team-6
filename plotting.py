@@ -24,3 +24,11 @@ def histograms(column_name, original, filtered, title, xlabel, ylabel):
     filt_column.hist(ax=ax2, alpha=0.9, color='blue')
     ax2.set_title('Filtered {title} Histogram'.format(title=title))
     ax2.set(xlabel=xlabel, ylabel=ylabel)
+
+def graph_labels(title, xlabel=None, ylabel=None):
+    """
+    Helps write title and axis labels.g
+    """
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
