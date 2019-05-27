@@ -1,20 +1,45 @@
+/*
+Subtle Asian Dating Score Quiz.
+
+37 Questions of numeric and true or false questions that calculate your
+dateability score.
+*/
+
 const CENTIMETERS_PER_INCH = 2.54;
 const INCHES_PER_FOOT = 12;
 const FORM_VERSION = 0;
 const FORM_TYPE = 'men';
 
+// Only run the code when the page is loaded.
 $(document).ready(function(){
     // Hide Score Box until score is calculated.
     $("#score_box").hide();
 
     // START Height Calculator
 
+    /**
+     * Converts from US Customary units to metric.
+     * @param {number} feet - Feet.
+     * @param {number} inches - Inches.
+     * @returns {number} - Height in centimeters.
+     */
     function imperial_to_centimeters(feet, inches){
         const total_inches = (feet * INCHES_PER_FOOT) + inches;
         const centimeters = total_inches * CENTIMETERS_PER_INCH;
         return centimeters;
     }
 
+    /**
+     * @typedef {Object} Height
+     * @property {number} feet - Height in feet.
+     * @property {number} inches - Height in inches. Ranges from 0 - 11 inches.
+     */
+
+    /**
+     * Converts from metric to US Customary units.
+     * @param {number} centimeters 
+     * @returns {Height} - The height in feet and inches.
+     */
     function centimeters_to_imperial(centimeters){
         var inches = centimeters / CENTIMETERS_PER_INCH;
         var feet = Math.floor(inches/INCHES_PER_FOOT);
@@ -27,13 +52,19 @@ $(document).ready(function(){
         return height;
     }
 
+    /**
+     * Callback to update the height from inches to centimeters.
+     */
     function update_cm(){
+        // Get the feet and inches values.
         var feet = $("#height_ft").val();
         var inches = $("#height_in").val();
 
+        // Convert to ints.
         feet = parseInt(feet);
         inches = parseInt(inches);
         
+        // Check that both parsed ints correctly.
         if(isNaN(feet)){
 
             console.log("Feet is NaN: " + feet);
@@ -46,11 +77,14 @@ $(document).ready(function(){
         console.log("Feet = " + feet);
         console.log("Feet type: " + typeof(feet));
         console.log("Inches = " + inches);
+
+        // Convert and update the centimeter input box.
         const cm = Math.round(imperial_to_centimeters(feet, inches));
         console.log("CM = " + cm);
         $("#height_cm").val(cm);
     }
 
+    // Setup the centimeters to feet/inches callback.
     $("#height_cm").on("keyup", function(){
         const cm = parseInt(this.value);
         var height = centimeters_to_imperial(cm);
@@ -62,6 +96,7 @@ $(document).ready(function(){
 
     });
 
+    // Bind the feet/inches to centimeters callbacks.
     $("#height_ft").on("keyup", function(){
         update_cm();
     });
@@ -82,6 +117,10 @@ $(document).ready(function(){
     const MAX_HEIGHT_CM = 177;
     const MIN_HEIGHT_CM = 170;
 
+    /**
+     * Calculates the height score.
+     * @returns {number} - Height score.
+     */
     function get_height_score(){
         var score = 0;
 
@@ -91,10 +130,12 @@ $(document).ready(function(){
             height = 0;
         }
 
+        // When you are above this height, you gain points.
         if(height > MAX_HEIGHT_CM){
             score = height - MAX_HEIGHT_CM;
         }
 
+        // When you are below this height, you lose points.
         if(height < MIN_HEIGHT_CM){
             score = height - MIN_HEIGHT_CM;
         }
@@ -118,6 +159,10 @@ $(document).ready(function(){
 
     const IQ_SCORE_MAG = 3;
 
+    /**
+     * Calculates points from the IQ score.
+     * @returns {number} - Points from IQ score.
+     */
     function get_iq_score(){
         var score = 0;
 
@@ -127,10 +172,12 @@ $(document).ready(function(){
             iq_score = 0;
         }
 
+        // Above this, gain points.
         if(iq_score > MAX_IQ_SCORE){
             score = IQ_SCORE_MAG;
         }
 
+        // Below this, lose points.
         if(iq_score < MIN_IQ_SCORE){
             score = -IQ_SCORE_MAG;
         }
@@ -150,6 +197,10 @@ $(document).ready(function(){
 
     const INSTRUMENT_SCORE_MAG = 3;
 
+    /**
+     * Caculates score from instruments.
+     * @returns {number} - Instrument score.
+     */
     function get_instrument_score(){
         var score = 0;
 
@@ -176,6 +227,10 @@ $(document).ready(function(){
 
     const LANGUAGE_FLUENT_SCORE_MAG = 3;
 
+    /**
+     * Calculates the fluent language score.
+     * @returns {number} - Fluent language score.
+     */
     function get_language_fluent_score(){
         var score = 0;
 
@@ -201,6 +256,10 @@ $(document).ready(function(){
 
     const LANGUAGE_NONFLUENT_SCORE_MAG = 1;
 
+    /**
+     * Calculates the non-fluent language score.
+     * @returns {number} - Non-fluent language score.
+     */
     function get_language_nonfluent_score(){
         var score = 0;
 
@@ -226,6 +285,10 @@ $(document).ready(function(){
 
     const TATTOO_SCORE_MAG = -1;
 
+    /**
+     * Calculates the tattoo score.
+     * @returns {number} - Tattoo score.
+     */
     function get_tatoo_score(){
         var score = 0;
 
@@ -269,6 +332,7 @@ $(document).ready(function(){
         score += get_language_nonfluent_score();
         score += get_tatoo_score();
 
+        // Send the quiz.
         send_results(score);
 
         // Update score and show score.
@@ -278,6 +342,11 @@ $(document).ready(function(){
     // END Calculate Score
 
     // START Checkbox Data
+    /**
+     * Collects all the data from the checkbox questions.
+     * @param {Form} checkbox - Form object.
+     * @returns {data} - Data object holding all the form data.
+     */
     function get_checkbox_data(checkbox){
         const name = checkbox.attr('name');
         const value = checkbox.prop('checked');
@@ -300,6 +369,11 @@ $(document).ready(function(){
     // END Checkbox Data
 
     // START Numeric Data
+    /**
+     * Collects all the numeric data values and scores.
+     * @param {Form} numeric - Form object.
+     * @returns {data} - Data object holding all the form data.
+     */
     function get_numeric_data(numeric){
         const name = numeric.attr('name');
         const value = numeric.val();
@@ -338,6 +412,10 @@ $(document).ready(function(){
     // END Numeric Data
 
     // START Collect Form Data
+    /**
+     * Collects all the form data into one object.
+     * @returns {Data} - Form data.
+     */
     function get_form_data(){
         var data = {};
 
@@ -363,6 +441,10 @@ $(document).ready(function(){
 
     const DATA_URL = '/data';
 
+    /**
+     * Sends the quiz response to the server to be logged.
+     * @param {number} total_score 
+     */
     function send_results(total_score){
         var num_langs = 3;
         var height = 5;
