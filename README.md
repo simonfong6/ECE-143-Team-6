@@ -1,5 +1,6 @@
 # ECE-143-Team-6
-ECE 143: Team 6 Group Project
+ECE 143: Team 6 Group Project  
+Subject: Subtle Asian Dating
 
 # File Structure
 ```
