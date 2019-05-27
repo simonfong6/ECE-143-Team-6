@@ -1,20 +1,45 @@
+/*
+Subtle Asian Dating Score Quiz.
+
+37 Questions of numeric and true or false questions that calculate your
+dateability score.
+*/
+
 const CENTIMETERS_PER_INCH = 2.54;
 const INCHES_PER_FOOT = 12;
 const FORM_VERSION = 1;
 const FORM_TYPE = 'men';
 
+// Only run the code when the page is loaded.
 $(document).ready(function(){
     // Hide Score Box until score is calculated.
     $("#score_box").hide();
 
     // START Height Calculator
 
+    /**
+     * Converts from US Customary units to metric.
+     * @param {number} feet - Feet.
+     * @param {number} inches - Inches.
+     * @returns {number} - Height in centimeters.
+     */
     function imperial_to_centimeters(feet, inches){
         const total_inches = (feet * INCHES_PER_FOOT) + inches;
         const centimeters = total_inches * CENTIMETERS_PER_INCH;
         return centimeters;
     }
 
+    /**
+     * @typedef {Object} Height
+     * @property {number} feet - Height in feet.
+     * @property {number} inches - Height in inches. Ranges from 0 - 11 inches.
+     */
+
+    /**
+     * Converts from metric to US Customary units.
+     * @param {number} centimeters 
+     * @returns {Height} - The height in feet and inches.
+     */
     function centimeters_to_imperial(centimeters){
         var inches = centimeters / CENTIMETERS_PER_INCH;
         var feet = Math.floor(inches/INCHES_PER_FOOT);
@@ -27,11 +52,19 @@ $(document).ready(function(){
         return height;
     }
 
+    /**
+     * Converts from metric to US Customary units.
+     * @param {number} centimeters 
+     * @returns {Height} - The height in feet and inches.
+     */
     function centimeters_to_inches(cm){
         const inches = cm / CENTIMETERS_PER_INCH;
         return Math.round(inches);
     }
 
+    /**
+     * Callback to update the height from inches to centimeters.
+     */
     function update_cm(){
         var feet = $("#height_ft").val();
         var inches = $("#height_in").val();
@@ -56,6 +89,7 @@ $(document).ready(function(){
         $("#height_cm").val(cm);
     }
 
+    // Setup the centimeters to feet/inches callback.
     $("#height_cm").on("keyup", function(){
         const cm = parseInt(this.value);
         var height = centimeters_to_imperial(cm);
@@ -67,6 +101,7 @@ $(document).ready(function(){
 
     });
 
+    // Bind the feet/inches to centimeters callbacks.
     $("#height_ft").on("keyup", function(){
         update_cm();
     });
@@ -87,6 +122,10 @@ $(document).ready(function(){
     const MAX_HEIGHT_IN = 5 * INCHES_PER_FOOT + 10;
     const MIN_HEIGHT_IN = 5 * INCHES_PER_FOOT + 7;
 
+    /**
+     * Calculates the height score.
+     * @returns {number} - Height score.
+     */
     function get_height_score(){
         var score = 0;
 
@@ -125,6 +164,10 @@ $(document).ready(function(){
 
     const IQ_SCORE_MAG = 3;
 
+    /**
+     * Calculates points from the IQ score.
+     * @returns {number} - Points from IQ score.
+     */
     function get_iq_score(){
         var score = 0;
 
@@ -157,6 +200,10 @@ $(document).ready(function(){
 
     const INSTRUMENT_SCORE_MAG = 3;
 
+     /**
+     * Caculates score from instruments.
+     * @returns {number} - Instrument score.
+     */
     function get_instrument_score(){
         var score = 0;
 
@@ -183,6 +230,10 @@ $(document).ready(function(){
 
     const LANGUAGE_FLUENT_SCORE_MAG = 3;
 
+    /**
+     * Calculates the fluent language score.
+     * @returns {number} - Fluent language score.
+     */
     function get_language_fluent_score(){
         var score = 0;
 
@@ -208,6 +259,10 @@ $(document).ready(function(){
 
     const LANGUAGE_NONFLUENT_SCORE_MAG = 1;
 
+    /**
+     * Calculates the non-fluent language score.
+     * @returns {number} - Non-fluent language score.
+     */
     function get_language_nonfluent_score(){
         var score = 0;
 
@@ -233,6 +288,10 @@ $(document).ready(function(){
 
     const TATTOO_SCORE_MAG = -1;
 
+    /**
+     * Calculates the tattoo score.
+     * @returns {number} - Tattoo score.
+     */
     function get_tatoo_score(){
         var score = 0;
 
@@ -266,6 +325,10 @@ $(document).ready(function(){
     const ATTRACTIVENESS_SCORE_MAX = 3;
     const ATTRACTIVENESS_SCORE_MIN = -3;
 
+    /**
+     * Calculates the score attractiveness rating.
+     * @returns {number} - Attractiveness score.
+     */
     function get_attractivness_score(){
         var score = 0;
 
@@ -329,6 +392,11 @@ $(document).ready(function(){
     // END Calculate Score
 
     // START Checkbox Data
+    /**
+     * Collects all the data from the checkbox questions.
+     * @param {Form} checkbox - Form object.
+     * @returns {data} - Data object holding all the form data.
+     */
     function get_checkbox_data(checkbox){
         const name = checkbox.attr('name');
         const value = checkbox.prop('checked');
@@ -351,6 +419,11 @@ $(document).ready(function(){
     // END Checkbox Data
 
     // START Numeric Data
+    /**
+     * Collects all the numeric data values and scores.
+     * @param {Form} numeric - Form object.
+     * @returns {data} - Data object holding all the form data.
+     */
     function get_numeric_data(numeric){
         const name = numeric.attr('name');
         const value = numeric.val();
@@ -392,6 +465,10 @@ $(document).ready(function(){
     // END Numeric Data
 
     // START Collect Form Data
+    /**
+     * Collects all the form data into one object.
+     * @returns {Data} - Form data.
+     */
     function get_form_data(){
         var data = {};
 
@@ -417,6 +494,10 @@ $(document).ready(function(){
 
     const DATA_URL = '/data';
 
+    /**
+     * Sends the quiz response to the server to be logged.
+     * @param {number} total_score 
+     */
     function send_results(total_score){
         var num_langs = 3;
         var height = 5;
