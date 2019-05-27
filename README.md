@@ -2,6 +2,12 @@
 ECE 143: Team 6 Group Project  
 Subject: Subtle Asian Dating
 
+# Authors
+* Simon Fong
+* Ivan Yang
+* Justine Lee
+* Brian Aguirre
+
 # File Structure
 ```
 server/                     # Web Server Code
