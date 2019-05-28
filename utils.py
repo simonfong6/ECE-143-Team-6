@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+Functions that help with loading and filtering the data.
 """
 import json
 import pandas as pd
@@ -8,7 +9,13 @@ DATA_FILE_NAME = 'data_fetching/sadscore_data.json'
 
 def dumps(dict_):
     """
-    Helps print dictionaries as indented JSON for readability.
+    Converts dictionaries to indented JSON for readability.
+
+    Args:
+        dict_ (dict): The dictionary to be JSON encoded.
+
+    Returns:
+        str: JSON encoded dictionary.
     """
     string = json.dumps(dict_, indent=4, sort_keys=True)
     return string
@@ -16,12 +23,21 @@ def dumps(dict_):
 def print_dict(dict_):
     """
     Prints a dictionary in readable format.
+
+    Args:
+        dict_ (dict): The dictionary to be JSON encoded.
     """
     print(dumps(dict_))
 
 class QuizResponse:
     """
     Wraps each individual response dictionary so that it is easier to access.
+
+    Attributes:
+        data (dict): The raw quiz response data.
+        timestamp (float): The timestamp of when the data was recorded.
+        total_score (int): The total score of this response.
+        responses (dict): Just the quiz question and value recorded.
     """
 
     def __init__(self, resp_data):
@@ -37,6 +53,13 @@ class QuizResponse:
     def filter_questions(responses):
         """
         Extract only the value of each response disregarding other details.
+
+        Args:
+            responses (dict(dict)): Responses for each question.
+
+        Returns:
+            dict(question->value): A dictionary that maps from question to
+                response value.
 
         Example:
         data = {
@@ -59,6 +82,9 @@ class QuizResponse:
 def load_data():
     """
     Loads the JSON data as a dictionary.
+
+    Returns:
+        list(dict): The data a dictionary.
     """
     with open(DATA_FILE_NAME) as input_file:
         data = json.load(input_file)
@@ -69,9 +95,16 @@ def filter(data):
     """
     Runs through all the data, creates QuizResponse objects, and puts them in a
     list.
+
+    Args:
+        data (list(dict)): The nested dictionaries to be converted.
+    
+    Returns:
+        list(QuizResponse): Each response as a QuizResponse object.
     """
     filtered = []
     for response in data:
+        # There is one dictionary that just stores the count of responses.
         if 'responses' not in response:
             continue
         qr = QuizResponse(response)
@@ -79,18 +112,34 @@ def filter(data):
     return filtered
 
 def create_dataframe(data):
+    """
+    Create a DataFrame from our data for easier manipulation.
+
+    Args:
+        data (list(dict): The quiz responses.
+
+    Returns:
+        pandas.DataFrame: The quiz responses as a DataFrame.
+    """
     df = pd.DataFrame(data)
     return df
 
 def load_data_dataframe():
     """
     Loads data as dataframe.
+
+    Returns:
+        pandas.DataFrame: The data loaded as dataframe.
     """
     data = load_data()
     data = filter(data)
+
+    # Just use the list of responses for each QuizReponse object.
     just_list = [ r.responses for r in data]
+
     df = create_dataframe(just_list)
 
+    # Columns to convert to numeric types.
     numeric_columns = [
         'foreign_langauges_fluent',
         'foreign_langauges_nonfluent',
@@ -104,7 +153,7 @@ def load_data_dataframe():
     for column in numeric_columns:
         df[column] = pd.to_numeric(df[column])
 
-            
+    # Convert tattoos column to numeric and fill NaN with 0's.
     column = 'tattoos'
     df[column] = pd.to_numeric(df[column])
     df[column].fillna(0)
@@ -121,6 +170,15 @@ def turn_off_scientific_notation():
 def drop_outliers(df, column_name, min_val, max_val):
     """
     Drops outliers based on range, inclusive.
+
+    Args:
+        df (pandas.DataFrame): The data to filter.
+        column_name (str): The column name to filter on.
+        min_val (int): The minimum value allowed in this category.
+        max_val (int): The maximum value allowed in this category.
+
+    Returns:
+        pandas.DataFrame: The same dataframe, but with outliers removed.
     """
 
     # Find the outliers.
@@ -137,6 +195,12 @@ def drop_outliers(df, column_name, min_val, max_val):
 def drop_all_outliers(df):
     """
     Drops all outliers.
+
+    Args:
+        df (pandas.DataFrame): The data to filter out outliers from.
+    
+    Returns:
+        pandas.DataFrame: The same data without outliers.
     """
 
     # Keep heights between 4ft and 8ft.
