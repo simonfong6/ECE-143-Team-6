@@ -8,6 +8,9 @@ Subject: Subtle Asian Dating
 * Justine Lee
 * Ivan Yang
 
+# Presentation
+You can view our presentation [here](https://docs.google.com/presentation/d/e/2PACX-1vS6ga2yJyG4DLHy3NqM45bMSaWShGB8QL8UWTp_AIHuywmi9bT1lAvE9VftSEF6QdJfw8IVJLOL5IXH/pub?start=false&loop=false&delayms=3000&slide=id.g5aa6e7467b_1_0):
+
 # File Structure
 ```
 server/                     # Web Server Code
