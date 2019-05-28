@@ -1,0 +1,397 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <title>Subtle Asian Dating Test</title>
+    <!-- START Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- END Bootstrap -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+    <!-- Already imported jQuery
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    -->
+    <script src="/static/js/quiz_men_1.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/static/images/favicon.ico">
+</head>
+<body>
+    <!-- 
+        Hey guys! Heard of the SAT score? Now here we have the SAD score. Score your friend, score yourself, score your son.
+
+    (Girl version coming as soon as I figure out what the standards are for females on SAD)
+
+    start with 0 points.
+
+    -add 1 for every inch over 5'10 and subtract 1 for every inch below 5'7
+
+    -add 3 points if you are studying engineering, law, or medicine
+
+    -add 2 more points if you have graduated with one of those degrees
+
+    -subtract 3 points if asian parents think your degree is a waste of time
+
+    -add 3 points if IQ above 130
+
+    -subtract 3 points if IQ below 110
+
+    -add 5 points if 6 figure salary
+
+    -subtract 5 points if you are jobless and not a student
+
+    -subtract 4 points if you aren't a student, aren't jobless, but your job is min wage / retail / hourly type that asian parents would "aiya" at
+
+    -add 4 points if you have, or graduated with, 3.9 GPA or above
+
+    -subtract over 9000 points if you dropped out of school
+
+    -add 3 points for every instrument you are trained classically in.
+
+    -add 3 points if you were first chair of your symphony at some point. Solo instruments, add 3 points if you've won any competitions post-middle school for the instrument
+
+    -add 2 points for varsity or college sports
+
+    -add 3 points for every language you can speak fluently other than english
+
+    -subtract 3 points if you are not fluent in english
+
+    -add 1 point for every language you know but are not fluent in
+
+    -subtract 5 points if english is the only language you know
+
+    -add 4 points if you are a church-going christian boi
+
+    -add 4 points if you are ripped
+
+    -add 3 points if you can dance/sing like a kpop oppa
+
+    -add 3 points if you have naturally perfect vision
+
+    -subtract 1 point for every tattoo
+
+    -add 2 points if you dress like a fuckboi
+
+    -add 2 points if you have over 10K instagram followers
+
+    -add 3 points if you can be considered a prominent figure in the local asian community
+
+    -subtract 1 point if you can't figure out what number goes in the blank without looking it up: 3.14159265_
+
+    -subtract 10 points if you are racist against other asian cultures
+
+    -subtract 3 points if you really sat here for 10 minutes and scored yourself when you could have been studying/practicing/working out
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Oh heck lmao my notification. Disclaimer: this is a parody of SAD standards are sad for laughs. If you’re mad at this come scream at me on instagram I don’t mind
+    @1ly_away
+    -->
+    <center>
+        <h1>Subtle Asian Dating Score</h1>
+        <p>
+            Hey guys! Heard of the SAT score? Now here we have the SAD score. The SAD score measures how much the average asian mother would approve of you as their child’s significant other.
+        </p>
+        <p>
+            Quiz Version 2. Version 1 can be found <a href="/quiz/men?version=0">here</a>:
+        </p>
+        <p>
+            Credit to Ev Erest Xu for scoring system.
+            <br>
+            Instagram: <a href="https://www.instagram.com/1ly_away/?hl=en">@1ly_away</a>
+        </p>
+    </center>
+    <ol type="1">
+        <li>
+            <!--
+                -add 1 for every inch over 5'10 and subtract 1 for every inch below 5'7
+            -->
+            Height:
+            <br>
+            <input type="number" class="quiz_input" id="height_cm" name="height_cm" value=0> Centimeters
+            <br>
+            <input type="number" id="height_ft" value=0> Feet
+            <input type="number" id="height_in" value=0> Inches
+        </li>
+        <li>
+            <!--
+                -add 2 points if a STEM, law, or medicine major.
+            -->
+            <input type="checkbox" class="quiz_input" name="degree_acceptable" value="2"> STEM, law, or medicine major.
+
+        </li>
+        <li>
+            <!--
+                -add 2 more points graduated
+            -->
+            <input type="checkbox" class="quiz_input" name="degree_graduated" value="2"> Graduated.
+        </li>
+        <li>
+            <!--
+                -add 2 points masters in progress or received
+            -->
+            <input type="checkbox" class="quiz_input" name="degree_masters" value="2"> Masters in progress or received.
+        </li>
+        <li>
+            <!--
+               -add 5 points PhD in progress or received
+            -->
+            <input type="checkbox" class="quiz_input" name="degree_phd" value="5"> PhD in progress or received.
+        </li>
+        <li>
+            <!--
+                -subtract 3 points if asian parents think your degree is a waste of time
+            -->
+            <input type="checkbox" class="quiz_input" name="degree_waste_of_time" value="-3"> Asian parents think your degree is a waste of time.
+        </li>
+        <li>
+            <!--
+                -add 3 points if IQ above 130
+
+                -subtract 3 points if IQ below 110
+            -->
+            <input type="number" class="quiz_input" name="iq_score" id="iq" value=0> IQ score or estimate.
+            <br>
+            IQ Score Meanings from this <a href="http://www.wilderdom.com/intelligence/IQWhatScoresMean.html">site</a>:
+            <ul>
+            <li>
+                Over 140 - Genius or near genius
+            </li>
+            <li>
+                120 - 140 - Very superior intelligence
+            </li>
+            <li>
+                110 - 119 - Superior intelligence
+            </li>
+            <li>
+                90 - 109 - Normal or average intelligence
+            </li>
+            <li>
+                80 - 89 - Dullness
+            </li>
+            <li>
+                70 - 79 - Borderline deficiency
+            </li>
+            <li>
+                Under 70 - Definite feeble-mindedness
+            </li>
+            </ul>
+        </li>
+
+        <li>
+            <!--
+                -add 2 points if salary is over 80k
+            -->
+            <input type="checkbox" class="quiz_input" name="salary_over_80k" value="2"> Salary is over 80k.
+        </li>
+        <li>
+            <!--
+                -add 3 points if 6 salary is over 100k
+            -->
+            <input type="checkbox" class="quiz_input" name="salary_over_100k" value="3"> Salary is over 100k.
+        </li>
+        <li>
+            <!--
+                -add 2 points if 6 salary is over 200k
+            -->
+            <input type="checkbox" class="quiz_input" name="salary_over_200k" value="2"> Salary is over 200k.
+        </li>
+        <li>
+            <!--
+                -subtract 5 points if you are jobless and not a student
+            -->
+            <input type="checkbox" class="quiz_input" name="unemployed_not_student" value="-5"> Jobless and not a student.
+        </li>
+        <li>
+            <!--
+                -subtract 4 points if you aren't a student, aren't jobless, but your job is min wage / retail / hourly type that asian parents would "aiya" at
+            -->
+            <input type="checkbox" class="quiz_input" name="job_unacceptable_not_student" value="-4"> Aren't a student, aren't jobless, but your job is min wage / retail / hourly type that asian parents would "aiya" at.
+        </li>
+        <li>
+            <!--
+                -add 4 points if you have, or graduated with, 3.9 GPA or above
+            -->
+            <input type="checkbox" class="quiz_input" name="gpa_acceptable" value="4"> If you have, or graduated with, 3.9 GPA or above.
+        </li>
+        <li>
+            <!--
+                -subtract over 9000 points if you dropped out of school
+            -->
+            <input type="checkbox" class="quiz_input" name="dropped_out" value="-9000"> If you dropped out of school.
+        </li>
+        <li>
+            <!--
+                -add 3 points for every instrument you are trained classically in.
+            -->
+            <input type="number" id="instruments" class="quiz_input" name="instruments" value=0> Number of instruments you are trained classically in.
+        </li>
+        <li>
+            <!--
+                -add 3 points if you were first chair of your symphony at some point. Solo instruments, add 3 points if you've won any competitions post-middle school for the instrument
+            -->
+            <input type="checkbox" class="quiz_input" name="instrument_good" value="3"> If you were first chair of your symphony at some point. Solo instruments, if you've won any competitions post-middle school for the instrument.
+        </li>
+        <li>
+            <!--
+                -add 2 points for varsity or college sports
+            -->
+            <input type="checkbox" class="quiz_input" name="sports_varsity_college" value="2"> Varsity or college sports.
+        </li>
+        <li>
+            <!--
+                -add 3 points for every language you can speak fluently other than english
+            -->
+            <input type="number" id="foreign_langauges_fluent" class="quiz_input" name="foreign_langauges_fluent" value=0> Number of languages you can speak fluently besides english.
+        </li>
+        <li>
+            <!--
+                -subtract 3 points if you are not fluent in english
+            -->
+           <input type="checkbox" class="quiz_input" name="english_non_fluent" value="-3"> Not fluent in english.
+        </li>
+        <li>
+            <!--
+                 -add 1 point for every language you know but are not fluent in
+            -->
+           <input type="number" id="foreign_langauges_nonfluent" class="quiz_input" name="foreign_langauges_nonfluent" value=0> Languages you know but are not fluent in.
+        </li>
+        <li>
+            <!--
+                -subtract 5 points if english is the only language you know
+            -->
+            <input type="checkbox" class="quiz_input" name="english_only" value="-5"> English is the only language you know.
+        </li>
+        <li>
+            <!--
+                -add 4 points if you are a church-going christian boi
+            -->
+            <input type="checkbox" class="quiz_input" name="church_going" value="4"> You are a church-going christian boi.
+        </li>
+        <li>
+            <!--
+                -add 3 points if you are ripped
+            -->
+            <input type="checkbox" class="quiz_input" name="ripped" value="3"> You are ripped.
+        </li>
+        <li>
+            <!--
+                -add 3 points if you can dance/sing like a kpop oppa
+            -->
+            <input type="checkbox" class="quiz_input" name="kpop_dance_sing" value="3"> Can dance/sing like a kpop oppa.
+        </li>
+        <li>
+            <!--
+                -add 3 points if you have naturally perfect vision
+            -->
+            <input type="checkbox" class="quiz_input" name="perfect_vision" value="3"> Have naturally perfect vision.
+        </li>
+        <li>
+            <!--
+                -subtract 1 point for every tattoo
+            -->
+            <input type="number" id="tattoos" class="quiz_input" name="tattoos" value=0> Number of tattoos that you have.
+        </li>
+        <li>
+            <!--
+                -add 2 points if you dress like a fuckboi
+            -->
+            <input type="checkbox" class="quiz_input" name="dress_like_fuccboi" value="2"> Dress like a fuckboi.
+        </li>
+        <li>
+            <!--
+                -add 2 points if you have over 10K instagram followers
+            -->
+            <input type="checkbox" class="quiz_input" name="over_10k_instagram" value="2"> Have over 10K instagram followers.
+        </li>
+        <li>
+            <!--
+                -add 3 points if you can be considered a prominent figure in the local asian community
+            -->
+            <input type="checkbox" class="quiz_input" name="asian_community_prominent_figure" value="3"> If you can be considered a prominent figure in the local asian community.
+        </li>
+        <li>
+            <!--
+                -subtract 1 point if you can't figure out what number goes in the blank without looking it up: 3.14159265_
+            -->
+            <input type="checkbox" class="quiz_input" name="pi_tenth_digit" value="-1"> If you can't figure out what number goes in the blank without looking it up: 3.14159265_ .
+        </li>
+        <li>
+            <!--
+                -subtract 10 points if you are racist against other asian cultures
+            -->
+            <input type="checkbox" class="quiz_input" name="racist_against_other_asians" value="-10"> Are racist against other asian cultures.
+        </li>
+        <li>
+            <!--
+                -add 3 points you always offer to pay for dates
+            -->
+            <input type="checkbox" class="quiz_input" name="always_offer_to_pay" value="3"> You always offer to pay for dates.
+        </li>
+        <li>
+            <!--
+                -subtract 3 if you feel salty about paying for all dates
+
+            -->
+            <input type="checkbox" class="quiz_input" name="salty_about_paying" value="-3"> You feel salty about paying for all dates.
+        </li>
+        <li>
+            <!--
+                -add 1 if you will let the girl pay for anything she wants to pay for
+
+            -->
+            <input type="checkbox" class="quiz_input" name="let_the_girl_pay_if_she_wants" value="1"> You will let the girl pay for anything she wants to pay for.
+        </li>
+        <li>
+            <!--
+                -add 1 if above plat rank in league
+            -->
+            <input type="checkbox" class="quiz_input" name="above_platinum" value="1"> Above plat rank in League.
+        </li>
+        <li>
+            <!--
+                Rate own attractiveness from 1-10 realistically
+6 is 0 points, 7=1pt, 8=2pt, 9=3pt, 10=no points (for being conceited lmao)
+and same thing downwards but stopping at minus 3 points. so 1-3 is -3 points
+            -->
+            <select class="quiz_input" id="attractiveness" name="attractiveness">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+            Rate own attractiveness from 1-10 realistically.
+        </li>
+        <li>
+            <!--
+                -subtract 3 points if you really sat here for 10 minutes and scored yourself when you could have been studying/practicing/working out
+            -->
+            <input type="checkbox" class="quiz_input" name="scored_yourself" value="-3"> If you really sat here for 10 minutes and scored yourself when you could have been studying/practicing/working out.
+        </li>
+    </ol>
+    <h2>Note from Original Poster:</h2>
+    <p>
+        Oh heck lmao my notification. Disclaimer: this is a parody of SAD standards are sad for laughs. If you’re mad at this come scream at me on instagram I don’t mind
+        <a href="https://www.instagram.com/1ly_away/?hl=en">@1ly_away</a>
+    </p>
+    <center>
+        <button type="button" class="btn btn-success" id="calculate">Calculate My Score</button>
+        <div id="score_box" class="jumbotron">
+            <h1>Score: <span id="score"></span></h1>  
+        </div>
+    </center>
+</body>
+
+
+</html>
