@@ -135,6 +135,13 @@ def load_data_dataframe():
     data = filter(data)
 
     # Just use the list of responses for each QuizReponse object.
+    responses = []
+    for response in data:
+        response_dict = response.responses
+        response_dict['timestamp'] = response.timestamp
+        response_dict['total_score'] = response.total_score
+
+        responses.append(response)
     just_list = [ r.responses for r in data]
 
     df = create_dataframe(just_list)
