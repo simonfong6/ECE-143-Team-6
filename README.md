@@ -75,6 +75,7 @@ All modules and libraries we used.
 * pandas
 * matplotlib
 * xlsxwriter
+* plotly
 
 
 ## HTML/CSS/Javascript
