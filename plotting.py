@@ -103,7 +103,7 @@ def pie_chart(percentages, column_name, yes_label, no_label, title):
 
     plt.title(title)
 
-def radar(angles, categories, values, ylim, yticks):
+def radar(angles, categories, values, ylim, yticks, fill_color='b'):
     """
     Helps plot a radar graph.
 
@@ -148,9 +148,9 @@ def radar(angles, categories, values, ylim, yticks):
     ax.plot(angles_first_doubled, values_first_doubled, linewidth=1, linestyle='solid')
 
     # Fill area
-    ax.fill(angles_first_doubled, values_first_doubled, 'b', alpha=0.1)
+    ax.fill(angles_first_doubled, values_first_doubled, fill_color, alpha=0.1)
 
-def plot_radar(categories, values, num_yticks=5):
+def plot_radar(categories, values, num_yticks=5, fill_color='b'):
     """
     Helps plot a radar graph.
 
@@ -170,9 +170,9 @@ def plot_radar(categories, values, num_yticks=5):
     # What will be the angle of each axis in the plot? (we divide the plot / number of variable)
     angles = [n / float(N) * 2 * pi for n in range(N)]
 
-    radar(angles, categories, values, max_value + step_size, yticks)
+    radar(angles, categories, values, max_value + step_size, yticks, fill_color)
     
-def plot_radar_df(df, column_names, xlabels=None):
+def plot_radar_df(df, column_names, xlabels=None, fill_color='b'):
     """
     Helps plot a radar graph.
 
@@ -203,4 +203,4 @@ def plot_radar_df(df, column_names, xlabels=None):
     values = list(sums.values())
 
     # Plot it.
-    plot_radar(categories, values)
+    plot_radar(categories, values, fill_color=fill_color)
