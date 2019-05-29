@@ -3,6 +3,7 @@
 Plotting functions
 """
 import matplotlib.pyplot as plt
+from math import pi             # For radar graph.
 
 def histogram(df, column_name, title, xlabel, ylabel):
     """
@@ -101,3 +102,105 @@ def pie_chart(percentages, column_name, yes_label, no_label, title):
     ax.axis('equal')
 
     plt.title(title)
+
+def radar(angles, categories, values, ylim, yticks, fill_color='b'):
+    """
+    Helps plot a radar graph.
+
+    Args:
+        angles (list): Angles to plot spines of radar graph. Should be in
+            radians. Spans from [0, 2*pi].
+        categories (list): Categories to write on each spine.
+        values (list): Values to plot for each spine.
+        ylim (int): How big to make the circle.
+        yticks (list(int)): The labels mark on each spine.
+    """
+    # Initialise the spider plot
+    ax = plt.subplot(111, polar=True)
+
+    # Draw one axe per variable + add labels labels yet
+    plt.xticks(angles, categories, color='black', size=10)
+    
+    
+    # Make sure the xtick labels don't overlap the graph.
+    for label,rot in zip(ax.get_xticklabels(),angles):
+        
+        # All labels on left side are right aligned.
+        # All labels on right side are left aligned.
+        if rot <= pi / 2 or rot >= 3 * pi / 2:
+            label.set_horizontalalignment("left")
+        else:
+            label.set_horizontalalignment("right")
+
+
+    # Draw ylabels
+    yticks_labels = [str(tick) for tick in yticks]
+    ax.set_rlabel_position(0)
+    plt.yticks(yticks, yticks_labels, color="black", size=7)
+    plt.ylim(0, ylim)
+    
+    # Angles/Values double first.
+    angles_first_doubled = angles + angles[:1]
+    values_first_doubled = values + values[:1]
+    
+
+    # Plot data
+    ax.plot(angles_first_doubled, values_first_doubled, linewidth=1, linestyle='solid')
+
+    # Fill area
+    ax.fill(angles_first_doubled, values_first_doubled, fill_color, alpha=0.1)
+
+def plot_radar(categories, values, num_yticks=5, fill_color='b'):
+    """
+    Helps plot a radar graph.
+
+    Args:
+        categories (list): Categories to write on each spine.
+        values (list): Values to plot for each spine.
+        num_yticks (int): Optional. Defaults to 5. The number of ticks to show
+            on each spine.
+    """
+    N = len(categories)
+    
+    max_value = int(max(values))
+    step_size = int(max_value / num_yticks)
+    
+    yticks = list(range(step_size, max_value , step_size))
+    
+    # What will be the angle of each axis in the plot? (we divide the plot / number of variable)
+    angles = [n / float(N) * 2 * pi for n in range(N)]
+
+    radar(angles, categories, values, max_value + step_size, yticks, fill_color)
+    
+def plot_radar_df(df, column_names, xlabels=None, fill_color='b'):
+    """
+    Helps plot a radar graph.
+
+    Args:
+        df (pandas.DataFrame): The data to be accessed to be plotted.
+        column_names (list(str)): The names of the columns to be plotted on the
+            graph.
+        xlabels (dict(str->str)): Maps each column name to human readable label.
+            Optional. When not specified, the column names are used as the
+            labels.
+    """
+    # Get sums.
+    sums = df.sum()
+
+    # Grab only the qualities we want.
+    sums = sums[column_names]
+
+    # Convert it to a dict.
+    sums = sums.to_dict()
+
+    # Pull column names and values.
+    if xlabels is not None:
+        names = list(sums.keys())
+        categories = [xlabels[name] for name in names]
+    else:
+        categories = list(sums.keys())
+    
+    values = list(sums.values())
+
+    # Plot it.
+    plot_radar(categories, values, fill_color=fill_color)
