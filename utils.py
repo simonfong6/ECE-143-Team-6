@@ -253,6 +253,14 @@ def drop_all_outliers(df):
 
     return df, outliers
 
+def drop_total_score_outliers(df):
+    return drop_outliers(
+                        df,
+                        'total_score',
+                        -1000,
+                        1000)
+
+
 def main():
     df = load_data_dataframe()
     turn_off_scientific_notation()
