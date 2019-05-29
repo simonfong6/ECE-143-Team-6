@@ -240,6 +240,13 @@ def drop_all_outliers(df):
                                                 0,
                                                 20)
 
+    # Drop total score outliers.
+    df, outliers_total_score = drop_outliers(
+                                    df,
+                                    'total_score',
+                                    -1000,
+                                    1000)
+
     # Combine outliers
     outliers = pd.concat(
                 [
@@ -248,7 +255,8 @@ def drop_all_outliers(df):
                     outliers_iq_score,
                     outliers_foreign_langauges_fluent,
                     outliers_foreign_langauges_nonfluent,
-                    outliers_tattoos
+                    outliers_tattoos,
+                    outliers_total_score
                 ])
 
     return df, outliers
