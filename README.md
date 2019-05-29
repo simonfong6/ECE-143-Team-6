@@ -76,6 +76,9 @@ All modules and libraries we used.
 * matplotlib
 * xlsxwriter
 * plotly
+* pyviz
+* holoviews
+* bokeh
 
 
 ## HTML/CSS/Javascript
