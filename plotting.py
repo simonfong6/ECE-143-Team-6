@@ -5,7 +5,7 @@ Plotting functions
 import matplotlib.pyplot as plt
 from math import pi             # For radar graph.
 
-def histogram(df, column_name, title, xlabel, ylabel):
+def histogram(df, column_name, title, xlabel, ylabel, bins=10):
     """
     Makes a histogram of the data.
 
@@ -19,7 +19,7 @@ def histogram(df, column_name, title, xlabel, ylabel):
     # Get the data.
     column = df[column_name]
     ax = plt.gca()
-    column.hist(ax=ax, alpha=0.9, color='blue')
+    column.hist(ax=ax, alpha=0.9, color='blue', bins=bins)
 
     # Handle title and labels.
     plt.title(title)
