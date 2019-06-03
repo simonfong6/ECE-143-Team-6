@@ -61,7 +61,7 @@ This should send you into your browser with the Jupyter site running.
 ### Running the Notebook
 Open up the `data_analysis.ipynb` notebook. Click on `Kernel` on the top. Then choose `Restart & Run All`. This should run all our data analysis code and generate the graphs.
 
-![running-notebook](running-notebook.gif)
+![running-notebook](images/running-notebook.gif)
 
 # Third Party Modules Used
 All modules and libraries we used.
