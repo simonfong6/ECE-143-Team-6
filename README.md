@@ -6,10 +6,10 @@ Subject: Subtle Asian Dating
 * Brian Aguirre
 * Simon Fong
 * Justine Lee
-* Ivan Yang
+* Mulin Yang
 
 # Presentation
-You can view our presentation [here](https://docs.google.com/presentation/d/e/2PACX-1vS6ga2yJyG4DLHy3NqM45bMSaWShGB8QL8UWTp_AIHuywmi9bT1lAvE9VftSEF6QdJfw8IVJLOL5IXH/pub?start=false&loop=false&delayms=3000&slide=id.g5aa6e7467b_1_0):
+You can view our presentation [here](https://docs.google.com/presentation/d/e/2PACX-1vS6ga2yJyG4DLHy3NqM45bMSaWShGB8QL8UWTp_AIHuywmi9bT1lAvE9VftSEF6QdJfw8IVJLOL5IXH/pub?start=false&loop=false&delayms=3000&slide=id.p1):
 
 # File Structure
 ```
@@ -60,6 +60,8 @@ This should send you into your browser with the Jupyter site running.
 
 ### Running the Notebook
 Open up the `data_analysis.ipynb` notebook. Click on `Kernel` on the top. Then choose `Restart & Run All`. This should run all our data analysis code and generate the graphs.
+
+![running-notebook](running-notebook.gif)
 
 # Third Party Modules Used
 All modules and libraries we used.
