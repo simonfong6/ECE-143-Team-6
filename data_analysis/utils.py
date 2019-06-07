@@ -5,7 +5,7 @@ Functions that help with loading and filtering the data.
 import json
 import pandas as pd
 
-DATA_FILE_NAME = 'data_fetching/sadscore_data.json'
+DATA_FILE_NAME = '../data_fetching/sadscore_data.json'
 
 def dumps(dict_):
     """
