@@ -13,6 +13,25 @@ You can view our presentation [here](https://docs.google.com/presentation/d/e/2P
 
 # File Structure
 ```
+bokeh_plots/
+    3elements.html
+    4elements.html
+data_analysis/
+    Data-analysis.ipynb
+    Ivan_work.ipynb
+    Justine.ipynb
+    main.ipynb              # Main Notebook with all graphs.
+    Nobody is allowed to read this, but Brian.ipynb
+    data_analysis.ipynb     
+    plotting.py             # Useful functions for plotting.
+    utils.py                # Tools for loading and filtering data.
+data_fetching/
+    download_mongo_db.py    # Downloads all the responses from the database.
+    sadscore_data.json      # The Data.
+images/
+    running-notebook.gif    # Gif to run notebook.
+presentation/
+    presentation.pdf        # The presentation.
 server/                     # Web Server Code
     static/                 # Static Files
         css/
@@ -26,12 +45,6 @@ server/                     # Web Server Code
             index.js
             quiz_men_1.js
     server.py               # Web Server
-data_fetching/
-    download_mongo_db.py    # Downloads all the responses from the database.
-analysis/
-    data_analysis.ipynb     # Main Notebook with all graphs.
-    plotting.py             # Useful functions for plotting.
-    utils.py                # Tools for loading and filtering data.
 LICENSE
 README.md
 ```
